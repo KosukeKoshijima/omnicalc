@@ -10,14 +10,16 @@ class CalculationsController < ApplicationController
     # The special word the user input is in the string @special_word.
     # ================================================================================
 
+a=@text
+b=@special_word
 
-    @character_count_with_spaces = @text.length
+    @character_count_with_spaces = a.length
 
-    @character_count_without_spaces = @text.gsub(" ","").length
+    @character_count_without_spaces = a.gsub(" ","").length
 
-    @word_count = @text.split(' ').length
-frequency = Hash.new(0)
-    @occurrences = @special_word.frequency
+    @word_count = a.split(' ').length
+
+    @occurrences = "Replace this string with your answer."
 
     # ================================================================================
     # Your code goes above.
@@ -60,12 +62,15 @@ frequency = Hash.new(0)
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = (@starting - @ending).to_i.abs
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+a=@starting
+b=@ending
+
+    @seconds = b - a
+    @minutes = (b-a)/60
+    @hours = (b-a)/360
+    @days = (b-a)/86400
+    @weeks = (b-a)/604800
+    @years = (b-a)/31536000
 
     # ================================================================================
     # Your code goes above.
