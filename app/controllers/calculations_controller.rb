@@ -90,7 +90,7 @@ a = @numbers
 
     @maximum = a.max
 
-    @range = "Replace this string with your answer."
+    @range = a.max-a.min
 
     @median = a.size % 2 == 0 ? a[a.size/2 - 1, 2].inject(:+) / 2.0 : a[a.size/2]
 
