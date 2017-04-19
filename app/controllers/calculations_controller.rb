@@ -13,10 +13,11 @@ class CalculationsController < ApplicationController
 
     @character_count_with_spaces = @text.length
 
+    @character_count_without_spaces = @text.gsub(" ","").length
 
     @word_count = @text.split(' ').length
-
-    @occurrences = "Replace this string with your answer."
+frequency = Hash.new(0)
+    @occurrences = @special_word.frequency
 
     # ================================================================================
     # Your code goes above.
@@ -59,7 +60,7 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
+    @seconds = (@starting - @ending).to_i.abs
     @minutes = "Replace this string with your answer."
     @hours = "Replace this string with your answer."
     @days = "Replace this string with your answer."
@@ -80,28 +81,28 @@ class CalculationsController < ApplicationController
     # Your code goes below.
     # The numbers the user input are in the array @numbers.
     # ================================================================================
+a = @numbers
+    @sorted_numbers = a.sort
 
-    @sorted_numbers = "Replace this string with your answer."
+    @count = a.count
 
-    @count = "Replace this string with your answer."
+    @minimum = a.min
 
-    @minimum = "Replace this string with your answer."
-
-    @maximum = "Replace this string with your answer."
+    @maximum = a.max
 
     @range = "Replace this string with your answer."
 
-    @median = "Replace this string with your answer."
+    @median = a.size % 2 == 0 ? a[a.size/2 - 1, 2].inject(:+) / 2.0 : a[a.size/2]
 
-    @sum = "Replace this string with your answer."
+    @sum = a.sum
 
-    @mean = "Replace this string with your answer."
+    @mean = @sum/@count
 
-    @variance = "Replace this string with your answer."
+    @variance = a.inject(0){|sum, i| sum + (i - @mean) ** 2 }/@count
 
-    @standard_deviation = "Replace this string with your answer."
+    @standard_deviation = Math.sqrt(@variance)
 
-    @mode = "Replace this string with your answer."
+    @mode = a.max_by {|value| a.count(value)}
 
     # ================================================================================
     # Your code goes above.
