@@ -10,16 +10,14 @@ class CalculationsController < ApplicationController
     # The special word the user input is in the string @special_word.
     # ================================================================================
 
-a=@text
-b=@special_word
 
-    @character_count_with_spaces = a.length
+    @character_count_with_spaces = @text.length - @text.count("\r")
 
-    @character_count_without_spaces = a.gsub(" ","").length
+    @character_count_without_spaces = @text.gsub(" ","").length - @text.count("\n") - @text.count("\r")
 
-    @word_count = a.split(' ').length
+    @word_count = @text.split.size
 
-    @occurrences = "Replace this string with your answer."
+    @occurrences = @text.downcase.scan(@special_word.downcase).count
 
     # ================================================================================
     # Your code goes above.
@@ -40,7 +38,7 @@ b=@special_word
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    @monthly_payment = (@apr / 12 / 100 * @principal) / (1 - ((1 + @apr / 12 / 100) ** ((-1) * @years * 12)))
 
     # ================================================================================
     # Your code goes above.
@@ -62,15 +60,12 @@ b=@special_word
     #   number of seconds as a result.
     # ================================================================================
 
-a=@starting
-b=@ending
-
-    @seconds = b - a
-    @minutes = (b-a)/60
-    @hours = (b-a)/360
-    @days = (b-a)/86400
-    @weeks = (b-a)/604800
-    @years = (b-a)/31536000
+    @seconds = (@ending - @starting).abs
+    @minutes = @seconds / 60
+    @hours =  @minutes / 60
+    @days = @hours / 24
+    @weeks = @days / 7
+    @years = @weeks / 52
 
     # ================================================================================
     # Your code goes above.
@@ -95,9 +90,10 @@ a = @numbers
 
     @maximum = a.max
 
-    @range = a.max-a.min
+    @range = @maximum-@minimum
 
-    @median = a.size % 2 == 0 ? a[a.size/2 - 1, 2].inject(:+) / 2.0 : a[a.size/2]
+    @len = @sorted_numbers.length
+    @median = (@sorted_numbers[(@len - 1) / 2] + @sorted_numbers[@len / 2]) / 2.0
 
     @sum = a.sum
 
